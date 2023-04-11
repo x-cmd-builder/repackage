@@ -20,7 +20,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      github_token: ${{ secrets.MINIMUM_PRIVILEGE_TOKEN }}
       ssh_key: ${{ secrets.REPO_REPACKAGE }}
       git_user: tzw-my
       git_email: tzw@x-cmd.com
@@ -46,6 +46,7 @@ jobs:
         uses: x-cmd/action@main
         with:
           code: |
+            x gh token $github_token
             git clone git@github.com:x-cmd-pkg/yanfa.git
             [ -f ./yanfa/.x-cmd/index ] || ls
             . ./yanfa/.x-cmd/index || true
