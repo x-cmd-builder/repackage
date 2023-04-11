@@ -36,7 +36,7 @@ jobs:
 
       - name: install x
         run: |
-          eval $(curl "https://raw.githubusercontent.com/x-cmd/get/main/index.html")|| cat 
+          eval $(curl "https://raw.githubusercontent.com/x-cmd/get/main/index.html")
           ls -lR  /home/runner/.x-cmd.root/v/latest
 
       - name: clone repository
