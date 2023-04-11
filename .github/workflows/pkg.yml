@@ -48,7 +48,7 @@ jobs:
           code: |
             git clone git@github.com:x-cmd-pkg/yanfa.git
             [ -f ./yanfa/.x-cmd/index ] || ls
-            bash ./yanfa/.x-cmd/index || true
+            . ./yanfa/.x-cmd/index || true
 
       # - name: run x-cmd yanfa
       #   run: |
