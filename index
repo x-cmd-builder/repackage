@@ -1,5 +1,0 @@
-# Author:       Li Junhao       l@x-cmd.com
-# shellcheck    shell=sh        disable=SC3043
-git clone git@github.com:x-cmd-pkg/yanfa.git >/dev/null 2>&1
-eval "$(curl https://get.x-cmd.com)"
-bash ./yanfa/.x-cmd/index
