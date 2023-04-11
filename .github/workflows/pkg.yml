@@ -34,15 +34,16 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-      - name: install x
-        run: |
-          eval "$(curl https://get.x-cmd.com)" || cat /home/runner/.x-cmd.root/v/latest/X
-          ls -R /home/runner/.x-cmd.root/v/latest
+      # - name: install x
+      #   run: |
+      #     eval "$(curl https://get.x-cmd.com)" || cat /home/runner/.x-cmd.root/v/latest/X
+
       - name: clone repository
         run: git clone git@github.com:x-cmd-pkg/yanfa.git
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
       - name: run x-cmd yanfa
+        uses: x-cmd/action@main
         run: |
           bash ./yanfa/.x-cmd/index
