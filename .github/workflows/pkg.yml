@@ -45,5 +45,7 @@ jobs:
 
       - name: run x-cmd yanfa
         uses: x-cmd/action@main
-        run: |
-          bash ./yanfa/.x-cmd/index
+        with:
+          code: bash ./yanfa/.x-cmd/index
+        # run: |
+        #   bash ./yanfa/.x-cmd/index
