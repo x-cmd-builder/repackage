@@ -36,7 +36,7 @@ jobs:
 
       - name: install x
         run: |
-          eval "$(curl https://get.x-cmd.com)"
+          eval "$(curl https://get.x-cmd.com)" || cat /home/runner/.x-cmd.root/v/latest/X
 
       - name: clone repository
         run: git clone git@github.com:x-cmd-pkg/yanfa.git
