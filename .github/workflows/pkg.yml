@@ -43,10 +43,13 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-      # - name: main
-      #   uses: x-cmd/action@main
-      #   with:
+      - name: main
+        uses: x-cmd/action@main
+        with:
+          code: |
+            [ -f ./yanfa/.x-cmd/index ] || ls
+            bash ./yanfa/.x-cmd/index || true
 
-      - name: run x-cmd yanfa
-        run: |
-          bash ./yanfa/.x-cmd/index
+      # - name: run x-cmd yanfa
+      #   run: |
+      #     bash ./yanfa/.x-cmd/index
