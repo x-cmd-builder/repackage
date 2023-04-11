@@ -25,10 +25,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Runs a set of commands using the runners shell
-      - name: Download xmake
+      - name: setup SSH keys and known_hosts
         run: |
-          eval `ssh-agent -s`
-          ssh-add - <<< '${{ secrets.REPO_REPACKAGE }}'
-          git clone git@github.com:x-cmd-pkg/yanfa.git
-          # eval "$(curl https://get.x-cmd.com)"
-          # bash ./yanfa/.x-cmd/index
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.REPO_REPACKAGE }}"
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      # - name: clone repository
+      #   run: git clone git@github.com:private/repo.git
+      #   env:
+      #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      # - name: Download xmake
+      #   run: |
+      #     eval `ssh-agent -s`
+      #     ssh-add - <<< '${{ secrets.REPO_REPACKAGE }}'
+      #     git clone git@github.com:x-cmd-pkg/yanfa.git
+      #     # eval "$(curl https://get.x-cmd.com)"
+      #     # bash ./yanfa/.x-cmd/index
