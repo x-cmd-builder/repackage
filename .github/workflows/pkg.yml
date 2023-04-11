@@ -22,31 +22,32 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
       # Runs a set of commands using the runners shell
-      - name: setup SSH keys and known_hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.REPO_REPACKAGE }}"
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      # - name: setup SSH keys and known_hosts
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     ssh-keyscan github.com >> ~/.ssh/known_hosts
+      #     ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+      #     ssh-add - <<< "${{ secrets.REPO_REPACKAGE }}"
+      #   env:
+      #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-      - name: install x
-        run: |
-          eval $(curl "https://raw.githubusercontent.com/x-cmd/get/main/index.html") || true
-      
-      - name: clone repository
-        run: git clone git@github.com:x-cmd-pkg/yanfa.git
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+      # - name: clone repository
+      #   run: git clone git@github.com:x-cmd-pkg/yanfa.git
+      #   env:
+      #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ssh_key: ${{ secrets.REPO_REPACKAGE }}
+        git_user: tzw-my
+        git_email: tzw@x-cmd.com
 
       - name: main
         uses: x-cmd/action@main
         with:
           code: |
+            git clone git@github.com:x-cmd-pkg/yanfa.git
             [ -f ./yanfa/.x-cmd/index ] || ls
             bash ./yanfa/.x-cmd/index || true
 
