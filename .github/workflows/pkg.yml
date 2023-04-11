@@ -34,14 +34,15 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
+      - name: install x
+        run: |
+          # eval "$(curl https://get.x-cmd.com)"
+
       - name: clone repository
         run: git clone git@github.com:x-cmd-pkg/yanfa.git
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      # - name: Download xmake
-      #   run: |
-      #     eval `ssh-agent -s`
-      #     ssh-add - <<< '${{ secrets.REPO_REPACKAGE }}'
-      #     git clone git@github.com:x-cmd-pkg/yanfa.git
-      #     # eval "$(curl https://get.x-cmd.com)"
-      #     # bash ./yanfa/.x-cmd/index
+
+      - name: run x-cmd yanfa
+        run: |
+          bash ./yanfa/.x-cmd/index
