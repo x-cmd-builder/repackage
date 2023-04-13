@@ -16,6 +16,7 @@ jobs:
       ssh_key: ${{ secrets.REPO_REPACKAGE }}
       git_user: tzw-my
       git_email: tzw@x-cmd.com
+      repo_name: termshark
 
     steps:
       - name: main
